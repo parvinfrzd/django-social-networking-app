@@ -13,6 +13,4 @@ class SignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        # I've tried both of these 'fields' declaration, result is the same
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
-        # fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email',)
