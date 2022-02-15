@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Profile
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 
 def dashboard(request):
     return render(request, "base.html")
@@ -26,7 +27,7 @@ def profile(request,pk):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
     
         if form.is_valid():
             user = form.save()
@@ -34,6 +35,6 @@ def signup(request):
             return redirect('index')
         else:
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
