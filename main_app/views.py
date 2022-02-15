@@ -3,6 +3,7 @@ from .models import Profile
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 def dashboard(request):
     return render(request, "base.html")
@@ -41,3 +42,11 @@ def signup(request):
     form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = '__all__'
+
+class ProfileDelete(DeleteView):
+  model = Profile
+  success_url = '/'
