@@ -7,7 +7,6 @@ from django.dispatch import receiver
 
 
 
-
 COUNTRY = 0
 CITY = 1
 
@@ -24,6 +23,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    def get_absolute_url(self):
+        return reverse('social:profile', kwargs={'user.profile.id': self.user.pk})
 
 
 @receiver(post_save, sender=User)
