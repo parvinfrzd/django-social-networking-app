@@ -9,24 +9,60 @@
     <title>SocialNetwork</title>
 </head>
 <body>
-    <section class="hero is-small is-success mb-4">
-        <div class="hero-body">
-            <h1 class="title is-1">SocialNetwork</h1>
-            <p class="subtitle is-4">
-                Social networking app built by Jas, Parvin, and Dylan
-            </p>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        {% comment %} <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-    </section>
-    <ul class="right">
-        <!-- changes below -->
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'logout' %}">Log Out</a></li>
-        {% else %}
-          <li><a href="{% url 'login' %}">Log In</a></li>
-          <li><a href="{% url 'social:signup' %}">Sign Up</a></li>
-        {% endif %}
-    </ul>
-
+       {% endcomment %}
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a href="{% url 'social:dashboard' %}" class="navbar-item">
+              Home
+            </a>
+      
+            <a href="{% url 'social:about' %}" class="navbar-item">
+              About
+            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'social:profile_list' %}" class="navbar-item">
+                  Profile Lists
+                </a>
+                <a href="{% url 'social:profile' user.profile.pk%}"class="navbar-item">
+                  My Profile
+                </a>
+            {% endif %} 
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="button is-primary">
+                        Log Out
+                    </a>
+                {% else %}
+                <a  href="{% url 'login' %}" class="button is-light">
+                    <strong>Log in</strong>
+                </a>
+                <a  href="{% url 'social:signup' %}" class="button is-light">
+                    <strong>Sign Up</strong>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <br><br><br>
     <div class="container">
         <div class="columns">
 
