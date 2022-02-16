@@ -12,6 +12,7 @@
         {{profile.bio}}
     </p>
     </div>
+    {% if current_user.pk != profile.pk %}
     <form method="post">
         {% csrf_token %}
         <div class="buttons has-addons">
@@ -28,6 +29,7 @@
         {% endif %}
         </div>
     </form>
+    {% endif %}
 </div>
 
 <div class="column is-one-third">
@@ -39,6 +41,7 @@
             </button>
         </a>
     </div>
+    {% if current_user.pk == profile.pk %}
     <div class="block">
         <a href="{% url 'social:profile_update' user.profile.pk%}">
             <button class="button is-dark is-outlined is-fullwidth">
@@ -46,6 +49,7 @@
             </button>
         </a>
     </div>
+    {% endif %}
 
     <div class="block">
         <h3 class="title is-4">
