@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-
-
 COUNTRY = 0
 CITY = 1
 
@@ -37,3 +35,14 @@ def create_profile(sender, instance, created, **kwargs):
 
         
         
+class Post(models.Model):
+    text = models.TextField()
+    likes = models.IntegerField() 
+
+    def __str__(self):
+        return f"text: {self.text}"
+
+class Comment(models.Model):
+    text = models.TextField()
+    likes = models.IntegerField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
