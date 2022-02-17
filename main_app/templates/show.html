@@ -13,4 +13,32 @@
   </div>
 </div>
 
+<div class="col s6">
+  <form action="{% url 'add_comment' post.id %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" class="btn" value="Post">
+  </form>
+  <br>
+  <h2>Comments</h2>
+  {% if post.comment_set.all %}
+  <table class="striped">
+    <thead>
+      <tr><th>Text</th><th>Likes</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for comment in post.comment_set.all %}
+        <tr>
+          <td>{{comment.text}}</td>
+          <td>{{comment.likes}}</td>
+          <td><a href="/posts/{{post.id}}/comments/{{comment.id}}">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No comments yet!</p>
+  {% endif %}
+</div>
+
 {% endblock %}
