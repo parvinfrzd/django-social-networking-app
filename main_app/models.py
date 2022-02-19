@@ -4,9 +4,8 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.utils import timezone
 
-COUNTRY = 0
-CITY = 1
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -36,13 +35,23 @@ def create_profile(sender, instance, created, **kwargs):
         
         
 class Post(models.Model):
-    text = models.TextField()
-    likes = models.IntegerField() 
-
-    def __str__(self):
-        return f"text: {self.text}"
-
-class Comment(models.Model):
+    user = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE,null=True)
     text = models.TextField()
     likes = models.IntegerField()
+    created_at = models.DateTimeField(default=timezone.now)
+ 
+
+    def __str__(self):
+        return (
+            f"{self.user} "
+            f"({self.created_at:%Y-%m-%d %H:%M}): "
+            f"{self.text[:30]}..."
+        )
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE,null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    text = models.TextField()
+    likes = models.IntegerField()
+    created_at = models.DateTimeField(default=timezone.now)
+
