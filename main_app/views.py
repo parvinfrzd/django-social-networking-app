@@ -1,21 +1,40 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from .forms import PostForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 
 from main_app.models import Post
 
-def PostList(request):
-    post = Post.objects.all()
-    print(post)
-    return render(request, 'main_app/post_list.html', {'post_list': post})
-  
-""""
 class PostList(ListView):
-  post = Post
-  def viewposts(self, post, request):
-    return post
-"""
+    def get(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        form = PostForm()
+
+        return render(request, 'main_app/post_list.html', {'post_list': posts})
+
+    def post(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        form = PostForm(request.POST)
+
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
+        return render(request, 'main_app/post_list.html', {'post_list': posts})
+        # context = {
+        #     'post_list': posts,
+        #     'form': form,
+        # }
+
+        # return render(request, 'main_app/post_list.html', {'post_list': posts})
+
+# def PostList(request):
+#     post = Post.objects.all()
+#     print(post)
+#     return render(request, 'main_app/post_list.html', {'post_list': post})
+
+
 class PostCreate(CreateView):
   model = Post
   fields = '__all__'

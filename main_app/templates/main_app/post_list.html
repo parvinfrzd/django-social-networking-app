@@ -8,26 +8,23 @@
     <div class="card-content">
       <!-- <span class="card-title">{{ post.text }}</span> -->
       <p>{{ post.text }}</p>
+
       <div class="d-flex flex-row">
-        <form method="POST" action="{% url 'like' post.id %}">
+        <form method="POST" action="{% url 'like' post.pk %}">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}" />
           <button type="submit">
             like
-            <i class="far fa-thumbs-up">
-              <span>{{ post.like.all.count }}</span></i
-            >
+            <span>{{ post.like.all.count }}</span>
           </button>
         </form>
 
-        <form method="POST" action="{% url 'dislike' post.id %}">
+        <form method="POST" action="{% url 'dislike' post.pk %}">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}" />
           <button type="submit">
             dislike
-            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-              <span>{{ post.dislike.all.count }}</span></i
-            >
+            <span>{{ post.dislike.all.count }}</span>
           </button>
         </form>
       </div>
