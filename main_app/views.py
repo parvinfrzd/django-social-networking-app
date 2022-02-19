@@ -6,9 +6,9 @@ from django.views import View
 from main_app.models import Post
 
 def PostList(request):
-  post = Post.objects.all()
-  print(post)
-  return render(request, 'main_app/post_list.html', {'post_list': post})
+    post = Post.objects.all()
+    print(post)
+    return render(request, 'main_app/post_list.html', {'post_list': post})
   
 """"
 class PostList(ListView):
@@ -40,26 +40,26 @@ class AddLike(View):
 
         is_dislike = False
 
-        for dislike in post.dislikes.all():
-            if dislike == request.user:
+        for dislike in post.dislike.all():
+            if dislike == request.user.id:
                 is_dislike = True
                 break
 
         if is_dislike:
-            post.dislikes.remove(request.user)
+            post.dislike.remove(request.user)
 
         is_like = False
 
-        for like in post.likes.all():
+        for like in post.like.all():
             if like == request.user:
                 is_like = True
                 break
 
         if not is_like:
-            post.likes.add(request.user)
+            post.like.add(request.user.id)
 
         if is_like:
-            post.likes.remove(request.user)
+            post.like.remove(request.user.id)
 
         next = request.POST.get('next', '/')
         return HttpResponseRedirect(next)
@@ -70,26 +70,26 @@ class AddDislike(View):
 
         is_like = False
 
-        for like in post.likes.all():
+        for like in post.like.all():
             if like == request.user:
                 is_like = True
                 break
-
+        
         if is_like:
-            post.likes.remove(request.user)
-
+            post.like.remove(request.user.id)
+        
         is_dislike = False
 
-        for dislike in post.dislikes.all():
+        for dislike in post.dislike.all():
             if dislike == request.user:
                 is_dislike = True
                 break
-
+        
         if not is_dislike:
-            post.dislikes.add(request.user)
+            post.dislike.add(request.user.id)
 
         if is_dislike:
-            post.dislikes.remove(request.user)
+            post.dislike.remove(request.user.id)
 
         next = request.POST.get('next', '/')
         return HttpResponseRedirect(next)
