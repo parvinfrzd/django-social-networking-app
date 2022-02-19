@@ -12,22 +12,19 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a href="{% url 'social:dashboard' %}" class="navbar-item">
-              Home
-            </a>
-      
             <a href="{% url 'social:about' %}" class="navbar-item">
               About
             </a>
             {% if user.is_authenticated %}
-                <a href="{% url 'social:profile_list' %}" class="navbar-item">
-                  Profile Lists
-                </a>
-                <a href="{% url 'social:profile' user.profile.pk%}"class="navbar-item">
-                  My Profile
-                </a>
-                <a href="{% url 'social:posts_create' %}" class="navbar-item">Add a Post</a>
-                <a href="/posts" class="navbar-item">All Posts</a>
+              <a href="{% url 'social:dashboard' %}" class="navbar-item">
+                Dashboard
+              </a>
+              <a href="{% url 'social:profile_list' %}" class="navbar-item">
+                Profile Lists
+              </a>
+              <a href="{% url 'social:profile' user.profile.pk%}"class="navbar-item">
+                My Profile
+              </a>
             {% endif %} 
             </div>
           </div>
