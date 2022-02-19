@@ -5,7 +5,7 @@ from .views import *
 app_name = "social"
 
 urlpatterns = [
-    path("", dashboard, name="dashboard"),
+    path('', dashboard, name="dashboard"),
     path('about/', about, name='about'),
     
     path('accounts/signup/', signup, name='signup'),
