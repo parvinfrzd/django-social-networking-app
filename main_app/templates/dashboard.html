@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% comment %} {% for followed in user.profile.follows.all %}
+    {% for post in followed.user.posts.all %}
+        <li>@{{post.user.username}} ({{ post.created_at }}): {{ post.text }}</li>
+    {% endfor %}
+{% endfor %} {% endcomment %}
+
+<div class="column">
+    {% for followed in user.profile.follows.all %}
+        {% for post in followed.user.posts.all %}
+            <div class="box">
+                {{ post.text }}
+                <span class="is-small has text-grey-light">
+                    {{ post.created_at }} by {{ post.user.username }}
+                </span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+{% endblock %}

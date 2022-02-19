@@ -42,7 +42,11 @@ class Post(models.Model):
  
 
     def __str__(self):
-        return f"text: {self.text}"
+        return (
+            f"{self.user} "
+            f"({self.created_at:%Y-%m-%d %H:%M}): "
+            f"{self.text[:30]}..."
+        )
 
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE,null=True)

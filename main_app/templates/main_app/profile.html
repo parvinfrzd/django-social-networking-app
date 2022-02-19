@@ -30,6 +30,17 @@
         </div>
     </form>
     {% endif %}
+
+    <div class="content"> 
+        {% for post in profile.user.posts.all %}
+        <div class="box"> 
+            {{ post.text }}
+            <span class="is-small has-text-grey-light">
+                ({{ post.created_at }})
+            </span> 
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 <div class="column is-one-third">
@@ -83,8 +94,7 @@
             {% endfor %}
             </ul>
         </div>
-    </div>
-
+    </div> 
 </div>
 
 {% endblock content %}

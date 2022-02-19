@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def dashboard(request):
-    return render(request, "base.html")
+    return render(request, "dashboard.html")
 
 def about(request):
     return render(request, "about.html")
