@@ -53,10 +53,6 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1753ba04d0888656af559d9d144f88400e185e3f
 class ProfileUpdate(LoginRequiredMixin,UpdateView):
     model = Profile
     fields = ['bio','birth_date']
