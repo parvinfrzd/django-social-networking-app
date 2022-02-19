@@ -12,8 +12,7 @@
     </form>
     <br><br>
 {% comment %} list all posts {% endcomment %}
-    {% for user in users %}
-        {% for post in user.posts.all %}
+        {% for post in posts %}
             <div class="box">
                 {{ post.text }}
                 <span class="is-small has text-grey-light">
@@ -22,7 +21,6 @@
                 <a href="/posts/{{ post.id }}">Post details</a>
             </div>
         {% endfor %}
-    {% endfor %}
 </div>
 
 

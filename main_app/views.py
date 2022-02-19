@@ -23,7 +23,8 @@ def dashboard(request):
             post.save()
             return redirect("social:dashboard")
     form = PostForm()
-    return render(request, "dashboard.html", {"form": form, "users": users})
+    posts = Post.objects.order_by('-created_at')
+    return render(request, "dashboard.html", {"form": form, "users": users, 'posts': posts})
 
 def about(request):
     return render(request, "about.html")
@@ -37,6 +38,7 @@ def profile_list(request):
 def profile(request,pk): 
     profile = Profile.objects.get(pk=pk)
     current_user = request.user.profile
+    posts = profile.user.posts.order_by('-created_at')
 
     if request.method == "POST":
         current_user_profile = request.user.profile
@@ -48,7 +50,7 @@ def profile(request,pk):
             elif action == "unfollow":
                 current_user_profile.follows.remove(profile)
             current_user_profile.save()
-    return render(request,'main_app/profile.html',{'profile':profile, 'current_user':current_user})
+    return render(request,'main_app/profile.html',{'profile':profile, 'current_user':current_user, 'posts':posts})
 
 def signup(request):
     error_message = ''

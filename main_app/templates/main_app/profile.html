@@ -32,12 +32,13 @@
     {% endif %}
 
     <div class="content"> 
-        {% for post in profile.user.posts.all %}
+        {% for post in posts %}
         <div class="box"> 
             {{ post.text }}
             <span class="is-small has-text-grey-light">
                 ({{ post.created_at }})
             </span> 
+            <a href="/posts/{{ post.id }}">Post details</a>
         </div>
         {% endfor %}
     </div>
@@ -60,6 +61,13 @@
             </button>
         </a>
     </div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-success is-fullwidth is-medium mt-5"
+                type="submit">Post
+        </button>
+    </form>
     {% endif %}
 
     <div class="block">
