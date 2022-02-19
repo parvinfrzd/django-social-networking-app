@@ -1,14 +1,27 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
+<<<<<<< HEAD
 from .models import Profile, Post, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from .forms import SignUpForm, CommentForm
+=======
+from .models import Profile, Post
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout
+from .forms import SignUpForm
+>>>>>>> 1753ba04d0888656af559d9d144f88400e185e3f
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 1753ba04d0888656af559d9d144f88400e185e3f
 def dashboard(request):
     return render(request, "base.html")
 
