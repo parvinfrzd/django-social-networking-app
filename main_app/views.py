@@ -23,19 +23,6 @@ class PostList(ListView):
             new_post = form.save(commit=False)
             new_post.author = request.user
             new_post.save()
-        # return render(request, 'main_app/post_list.html', {'post_list': posts})
-        # context = {
-        #     'post_list': posts,
-        #     'form': form,
-        # }
-
-        # return render(request, 'main_app/post_list.html', {'post_list': posts})
-
-# def PostList(request):
-#     post = Post.objects.all()
-#     print(post)
-#     return render(request, 'main_app/post_list.html', {'post_list': post})
-
 
 class PostCreate(CreateView):
   model = Post
@@ -89,7 +76,6 @@ class AddLike(View):
 
         next = request.POST.get('next', '/')
         return HttpResponseRedirect(next)
-
 
 
 class AddDislike(View):
