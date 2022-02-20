@@ -7,21 +7,23 @@ from django.views import View
 from main_app.models import Post
 
 class PostList(ListView):
+    model = Post
+    template_name = "main_app/post_list.html"
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()
-        form = PostForm()
+        # form = PostForm()
 
         return render(request, 'main_app/post_list.html', {'post_list': posts})
 
     def post(self, request, *args, **kwargs):
-        posts = Post.objects.all()
+        post = Post.objects.all()
         form = PostForm(request.POST)
 
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.author = request.user
             new_post.save()
-        return render(request, 'main_app/post_list.html', {'post_list': posts})
+        # return render(request, 'main_app/post_list.html', {'post_list': posts})
         # context = {
         #     'post_list': posts,
         #     'form': form,
@@ -60,7 +62,7 @@ class AddLike(View):
         is_dislike = False
 
         for dislike in post.dislike.all():
-            if dislike == request.user.id:
+            if dislike == request.user:
                 is_dislike = True
                 break
 
@@ -80,8 +82,15 @@ class AddLike(View):
         if is_like:
             post.like.remove(request.user.id)
 
+        def likecount():
+            print("1")
+
+        likecount()
+
         next = request.POST.get('next', '/')
         return HttpResponseRedirect(next)
+
+
 
 class AddDislike(View):
     def post(self, request, pk, *args, **kwargs):
@@ -95,7 +104,7 @@ class AddDislike(View):
                 break
         
         if is_like:
-            post.like.remove(request.user.id)
+            post.like.remove(request.user)
         
         is_dislike = False
 
