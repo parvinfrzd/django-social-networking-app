@@ -54,4 +54,11 @@ class Comment(models.Model):
     text = models.TextField()
     likes = models.IntegerField()
     created_at = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return (
+            f"{self.user} "
+            f"({self.created_at:%Y-%m-%d %H:%M}): "
+            f"{self.text[:30]}..."
+        )
 
