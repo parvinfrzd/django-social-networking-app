@@ -109,7 +109,9 @@ class CommentUpdate(LoginRequiredMixin,UpdateView):
 
 class CommentDelete(LoginRequiredMixin,DeleteView):
     model = Comment
-    success_url = '/'
+    def get_success_url(self):
+        post = self.object.post 
+        return reverse( 'social:show', kwargs={'post_id': post.id})
     
 @login_required
 def show(request, post_id):
@@ -125,7 +127,7 @@ def show(request, post_id):
             comment.user = request.user
             comment.post = post
             comment.save()
-            return redirect('social:dashboard')
+            return redirect(f"/posts/{post_id}")
     form = CommentForm()
     
     return render(request, 'show.html', {"form": form,'post': post, 'current_post_user':current_post_user, 'current_user': current_user})

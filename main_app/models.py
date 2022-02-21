@@ -39,7 +39,6 @@ class Post(models.Model):
     text = models.TextField()
     likes = models.IntegerField()
     created_at = models.DateTimeField(default=timezone.now)
- 
 
     def __str__(self):
         return (
@@ -47,6 +46,8 @@ class Post(models.Model):
             f"({self.created_at:%Y-%m-%d %H:%M}): "
             f"{self.text[:30]}..."
         )
+    
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE,null=True)
