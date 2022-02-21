@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
-from .models import Profile, Post
+from .models import Profile, Post, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
-from .forms import SignUpForm, PostForm
+from .forms import SignUpForm, PostForm, CommentForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -102,10 +102,31 @@ class PostDelete(LoginRequiredMixin,DeleteView):
     model = Post
     success_url = '/'
     
+class CommentUpdate(LoginRequiredMixin,UpdateView):
+    model = Comment
+    fields = ['text']
+    success_url = '/'
+
+class CommentDelete(LoginRequiredMixin,DeleteView):
+    model = Comment
+    success_url = '/'
+    
 @login_required
 def show(request, post_id):
     current_post_user = Post.objects.get(id=post_id).user
     current_user = request.user
     post = Post.objects.get(id=post_id)
-    return render(request, 'show.html', {'post': post, 'current_post_user':current_post_user, 'current_user': current_user})
+
+    form = CommentForm(request.POST or None)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+            return redirect('social:dashboard')
+    form = CommentForm()
+    
+    return render(request, 'show.html', {"form": form,'post': post, 'current_post_user':current_post_user, 'current_user': current_user})
 

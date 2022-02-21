@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Comment
 
 
 class SignUpForm(UserCreationForm):
@@ -33,3 +33,19 @@ class PostForm(forms.ModelForm):
     class Meta: 
         model = Post
         exclude = ("user", "created_at")
+        
+class CommentForm(forms.ModelForm): 
+    text = forms.CharField(
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "Write your comment here",
+                "class": "textarea is-success is-medium",
+            }
+        ),
+        label="",
+    )
+    likes = forms.IntegerField(required=True)
+    class Meta: 
+        model = Comment
+        exclude = ("user", "created_at","post")

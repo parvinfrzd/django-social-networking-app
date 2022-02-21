@@ -26,6 +26,18 @@
             {{ comment.created_at }} 
         </span>
     </div>
+    <div class="card">
+      <a href="{% url 'social:comment_update' comment.id %}">Edit</a>
+      <a href="{% url 'social:comment_delete' comment.id %}">Delete</a>
+    </div>
   {% endfor %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="button is-success is-fullwidth is-medium mt-5"
+            type="submit">Comment
+    </button>
+</form>
 
 {% endblock %}
