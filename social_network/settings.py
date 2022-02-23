@@ -85,17 +85,24 @@ WSGI_APPLICATION = 'social_network.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['NAME'],
-        'USER': os.environ['USER'],
-        'PASSWORD': os.environ['PASSWORD'],
-        'HOST': os.environ['HOST'],
-        'PORT': os.environ['PORT'],
+if os.environ['DJANGO_ENV'] == 'dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'socialnetwork2',
+            'USER': os.environ['USER'],
+            'PASSWORD': os.environ['PASSWORD'],
+            'HOST': os.environ['HOST'],
+            'PORT': os.environ['PORT'],
+        }
     }
-}
+else: 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'socialnetwork2',
+        }
+    }
 
 
 # Password validation
