@@ -27,12 +27,10 @@ class PostForm(forms.ModelForm):
             }
         ),
         label="",
-    )
-    likes = forms.IntegerField(required=True)
-    
+    )    
     class Meta: 
         model = Post
-        exclude = ("user", "created_at")
+        exclude = ("user", "created_at","likes")
         
 class CommentForm(forms.ModelForm): 
     text = forms.CharField(
@@ -45,7 +43,6 @@ class CommentForm(forms.ModelForm):
         ),
         label="",
     )
-    likes = forms.IntegerField(required=True)
     class Meta: 
         model = Comment
-        exclude = ("user", "created_at","post")
+        exclude = ("user", "created_at","post","likes")

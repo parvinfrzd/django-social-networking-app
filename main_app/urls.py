@@ -1,6 +1,6 @@
 from django.urls import path
+from . import views 
 from .views import *
-
 
 app_name = "social"
 
@@ -23,5 +23,6 @@ urlpatterns = [
     path('comments/<int:pk>/update/', CommentUpdate.as_view(), name='comment_update'),
     path('comments/<int:pk>/delete/', CommentDelete.as_view(), name='comment_delete'),
 
-
+    path('posts/<int:pk>/like/', views.AddLike.as_view(), name='like'),
+    path('posts/<int:pk>/dislike/', views.AddDislike.as_view(), name='dislike'),
 ]
