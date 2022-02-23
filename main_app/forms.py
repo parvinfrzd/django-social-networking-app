@@ -1,26 +1,35 @@
 from django import forms
-from .models import Post, Comment
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import Post
 
-class PostForm(forms.ModelForm):
-    body = forms.CharField(
-        label='',
-        widget=forms.Textarea(attrs={
-            'rows': '3',
-            'placeholder': 'Say Something...'
-            }))
 
-    class Meta:
+class SignUpForm(UserCreationForm):
+    username = forms.CharField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name=forms.CharField(required=True)
+    email=forms.EmailField(required=True)
+    password1=forms.CharField(required=True)
+    password2=forms.CharField(required=True)
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+        
+class PostForm(forms.ModelForm): 
+    text = forms.CharField(
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "Write something here",
+                "class": "textarea is-success is-medium",
+            }
+        ),
+        label="",
+    )
+    likes = forms.IntegerField(required=True)
+    
+    class Meta: 
         model = Post
-        fields = ['body']
-
-class CommentForm(forms.ModelForm):
-    comment = forms.CharField(
-        label='',
-        widget=forms.Textarea(attrs={
-            'rows': '3',
-            'placeholder': 'Say Something...'
-            }))
-
-    class Meta:
-        model = Comment
-        fields = ['comment']
+        exclude = ("user", "created_at")

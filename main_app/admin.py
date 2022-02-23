@@ -1,5 +1,20 @@
 from django.contrib import admin
-from .models import Post, Comment
-# Register your models here.
+from django.contrib.auth.models import Group, User
+from .models import Profile, Post, Comment
+
+class ProfileInline(admin.StackedInline):
+    model = Profile
+
+class UserAdmin(admin.ModelAdmin):
+    model = User
+    fields = ["first_name","last_name","email","username","password"]
+    inlines = [ProfileInline]
+
+    
+    
+admin.site.unregister(User)
+admin.site.register(User,UserAdmin)
+admin.site.unregister(Group)
 admin.site.register(Post)
 admin.site.register(Comment)
+
