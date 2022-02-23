@@ -11,7 +11,7 @@
       <head>
        
       <div class="d-flex flex-row">
-        <form method="POST" action="{% url 'like' post.pk %}">
+        <form method="POST" action="{% url 'social:like' post.pk %}">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}" />
           <button type="submit">like
@@ -19,7 +19,7 @@
           </button>
         </form>
 
-        <form method="POST" action="{% url 'dislike' post.pk %}">
+        <form method="POST" action="{% url 'social:dislike' post.pk %}">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}" />
           <button type="submit">dislike
