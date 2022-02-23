@@ -37,7 +37,7 @@ WSGI_APPLICATION = 'social_network.wsgi.application'
 SECRET_KEY = 'django-insecure-tl4(#v@@-oefv=s56ira+nwq&c5(1#rn++a%%&qdd$^g%qt5b8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
