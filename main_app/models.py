@@ -37,7 +37,8 @@ def create_profile(sender, instance, created, **kwargs):
 class Post(models.Model):
     user = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE,null=True)
     text = models.TextField()
-    likes = models.IntegerField()
+    like = models.ManyToManyField(User, blank=True, related_name='like') 
+    dislike = models.ManyToManyField(User, blank=True, related_name='dislike') 
     created_at = models.DateTimeField(default=timezone.now)
  
 
@@ -52,6 +53,8 @@ class Comment(models.Model):
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE,null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.TextField()
-    likes = models.IntegerField()
+    like = models.ManyToManyField(User, blank=True, related_name='+') 
+    dislike = models.ManyToManyField(User, blank=True, related_name='+') 
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
 
