@@ -14,7 +14,7 @@ from pathlib import Path
 
 import environ
 import os
-
+import django_heroku
 
 environ.Env()
 environ.Env.read_env()
@@ -143,5 +143,5 @@ LOGIN_REDIRECT_URL = '/profile_list/'
 LOGOUT_REDIRECT_URL = '/'
 
 
-import django_heroku
+
 django_heroku.settings(locals())
