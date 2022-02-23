@@ -156,3 +156,5 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = '/profile_list/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+django_heroku.settings(locals())
