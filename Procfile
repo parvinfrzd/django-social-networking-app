@@ -1,1 +1,1 @@
-gunicorn social_network.wsgi
+web: gunicorn social_network.wsgi
