@@ -1,20 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <title>SocialNetwork</title>
 </head>
-<body>
+<body style="height: 100vh;">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a href="{% url 'social:about' %}" class="navbar-item">
-              About
-            </a>
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="{% url 'social:about' %}" class="button is-light" id="about">
+                  <strong>About</strong>
+                </a>
+              </div>
+            </div>
             {% if user.is_authenticated %}
               <a href="{% url 'social:dashboard' %}" class="navbar-item">
                 Dashboard
