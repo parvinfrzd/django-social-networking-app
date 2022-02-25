@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>Post Details</h1>
 
@@ -8,36 +7,36 @@
     <p>{{ post.text }}</p>
   </div>
   {% if current_user.pk == current_post_user.pk %}
-  <div class="card">
-    <a href="{% url 'social:posts_update' post.id %}">Edit</a>
-    <a href="{% url 'social:posts_delete' post.id %}">Delete</a>
+  <div class="card-action">
+    <a href="{% url 'social:posts_update' post.id %}" class="card-footer-item"
+      >Edit</a
+    >
+    <a href="{% url 'social:posts_delete' post.id %}" class="card-footer-item"
+      >Delete</a
+    >
   </div>
 </div>
-  {% endif %}
+{% endif %}
 
-  <br><br>
-  
-  <h1>Comments</h1>
-  {% for comment in post.comment_set.all %}
-    <div class="box">
-      {{ comment.user.username }} : 
-        {{ comment.text }}
-        <span class="is-small has text-grey-light">
-            {{ comment.created_at }} 
-        </span>
-    </div>
-    <div class="card">
-      <a href="{% url 'social:comment_update' comment.id %}">Edit</a>
-      <a href="{% url 'social:comment_delete' comment.id %}">Delete</a>
-    </div>
-  {% endfor %}
+<br /><br />
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="button is-success is-fullwidth is-medium mt-5"
-            type="submit">Comment
-    </button>
+<h1>Comments</h1>
+{% for comment in post.comment_set.all %}
+<div class="box">
+  {{ comment.user.username }} : {{ comment.text }}
+  <span class="is-small has text-grey-light"> {{ comment.created_at }} </span>
+</div>
+<div class="card">
+  <a href="{% url 'social:comment_update' comment.id %}">Edit</a>
+  <a href="{% url 'social:comment_delete' comment.id %}">Delete</a>
+</div>
+{% endfor %}
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button class="button is-success is-fullwidth is-medium mt-5" type="submit">
+    Comment
+  </button>
 </form>
 
 {% endblock %}

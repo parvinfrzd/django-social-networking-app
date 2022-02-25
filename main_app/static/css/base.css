@@ -1,31 +1,113 @@
 body {
-  background-color: black;
+  background-color: #e7eff6;
+  background-size: auto;
   margin: 0;
-  height: 120vh;
+  height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .navbar {
-  background-color: #4B86B4;
-  font-weight: 500;
+  background-color: #4b86b4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  border-right: 2px solid white;
+  color: #e7eff6;
 }
 
-.navbar-item:hover {
-  border-radius: 10%;
+p {
+  color: #2a4d69;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.logo {
-  background-image: url('../images/logo.png');
-  background-repeat: no-repeat;
-  width: 100vh;
-  height: 100vh;
-  margin-left: 500px;
-  margin-bottom: auto;
+h1 {
+  color: #2a4d69;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-right: 50px;
 }
 
-.logo > form {
-  margin-top: 350px;
-  margin-left: 80px;
-  padding: 10px;
-  color: #4B86B4;
+.card .card-content {
+  position: relative;
+  background: #e7eff6;
+  color: #e7eff6;
+  border-radius: 15px 15px;
+  border: 3px solid #4b86b4;
+  width: auto;
+  height: auto;
+  margin: auto;
+  padding: 20%;
+}
+
+.box {
+  border-radius: 15px 50px;
+  border: 3px solid #4b86b4;
+  width: 200px;
+  height: 150px;
+  margin: auto;
+  color: #2a4d69;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e7eff6;
+}
+
+box {
+  border-radius: 15px 50px;
+  border: 3px solid #4b86b4;
+  width: 200px;
+  height: 150px;
+  margin: auto;
+  color: #2a4d69;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+  background: #63ace5;
+  border-radius: 999px;
+  box-shadow: #63ace5 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji",
+    NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji",
+    EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.button .buttons {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: #4eb5f1;
+  text-align: center;
+  transition: all 0.2s;
+}
+.button:hover .buttons:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+@media all and (max-width: 30em) {
+  .button .buttons {
+    display: block;
+    margin: 0.2em auto;
+  }
 }
