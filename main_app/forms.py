@@ -10,7 +10,7 @@ class SignUpForm(UserCreationForm):
     last_name=forms.CharField(required=True)
     email=forms.EmailField(required=True)
     password1=forms.CharField(required=True)
-    password2=forms.CharField(required=True)
+    confirm_password=forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -30,7 +30,7 @@ class PostForm(forms.ModelForm):
     )    
     class Meta: 
         model = Post
-        exclude = ("user", "created_at","likes")
+        exclude = ("user", "created_at","likes","like","dislike")
         
 class CommentForm(forms.ModelForm): 
     text = forms.CharField(
@@ -45,4 +45,4 @@ class CommentForm(forms.ModelForm):
     )
     class Meta: 
         model = Comment
-        exclude = ("user", "created_at","post","likes")
+        exclude = ("user", "created_at","post","likes","like","dislike")

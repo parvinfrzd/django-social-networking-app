@@ -1,20 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <title>SocialNetwork</title>
 </head>
-<body>
+<body style="height: 100vh;">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a href="{% url 'social:about' %}" class="navbar-item">
-              About
-            </a>
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="{% url 'social:about' %}" class="button is-light" id="about">
+                  <strong>About</strong>
+                </a>
+              </div>
+            </div>
             {% if user.is_authenticated %}
               <a href="{% url 'social:dashboard' %}" class="navbar-item">
                 Dashboard
@@ -33,14 +39,14 @@
             <div class="navbar-item">
               <div class="buttons">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="button is-primary">
+                    <a href="{% url 'logout' %}" class="button is-rounded is-primary ">
                         Log Out
                     </a>
                 {% else %}
-                <a  href="{% url 'login' %}" class="button is-light">
+                <a  href="{% url 'login' %}" class="is-rounded button is-light">
                     <strong>Log in</strong>
                 </a>
-                <a  href="{% url 'social:signup' %}" class="button is-light">
+                <a  href="{% url 'social:signup' %}" class="is-rounded button is-light">
                     <strong>Sign Up</strong>
                 </a>
                 {% endif %}
@@ -59,3 +65,41 @@
 
         </div>
     </div>
+{% comment %} {% load static %} {% endcomment %}
+ {% comment %} THE COMING CHANGES  {% endcomment %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <ul>
+          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Django Social Networking App</a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="/posts">All Posts</a></li>
+          <li><a href="{% url 'posts_create' %}">Add a Post</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    {% block content %}
+    {% endblock %}
+  </main>
+  <footer class="page-footer">
+    <div class="right">All Rights Reserved &copy; 2022 Django Social Networking App &nbsp;</div>
+  </footer>
+</body>
+</html>  {% endcomment %}
