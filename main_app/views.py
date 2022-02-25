@@ -39,18 +39,28 @@ def profile(request,pk):
     profile = Profile.objects.get(pk=pk)
     current_user = request.user.profile
     posts = profile.user.posts.order_by('-created_at')
-
+    form = PostForm(request.POST or None)
     if request.method == "POST":
         current_user_profile = request.user.profile
         data = request.POST
         action = data.get("follow")
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect(f"/profile/{profile.pk}")
+        
         if(current_user.pk != profile.pk):
             if action == "follow":
                 current_user_profile.follows.add(profile)
             elif action == "unfollow":
                 current_user_profile.follows.remove(profile)
             current_user_profile.save()
-    return render(request,'main_app/profile.html',{'profile':profile, 'current_user':current_user, 'posts':posts})
+            
+    form = PostForm()
+
+    return render(request,'main_app/profile.html',{'profile':profile, 'current_user':current_user, 'posts':posts, 'form': form})
 
 def signup(request):
     error_message = ''
