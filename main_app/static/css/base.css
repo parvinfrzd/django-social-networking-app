@@ -29,3 +29,19 @@ body {
   padding: 10px;
   color: #4B86B4;
 }
+
+#texts {
+  color: #4B86B4;
+}
+
+.sign_up {
+padding-left: 80px;
+}
+.form{
+  padding-left: 50px;
+  padding-top: 10px;
+}
+
+p{
+  margin-top: 10px;
+}
