@@ -11,7 +11,7 @@
         </button>
     </form>
     <br><br>
-{% comment %} list all posts {% endcomment %}
+        {% comment %} list all posts {% endcomment %}
         {% for post in posts %}
             <div class="box">
                 {{ post.text }}
@@ -19,6 +19,22 @@
                     {{ post.created_at }} by {{ post.user.username }}
                 </span>
                 <a href="/posts/{{ post.id }}">Post details</a>
+                {% comment %} Add Like {% endcomment %}
+                <form method="POST" action="{% url 'social:like' post.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <button type="submit">like
+                        <span> {{ post.like.all.count }}</span>
+                    </button>
+                </form>
+                {% comment %} Add Dislike {% endcomment %}
+                <form method="POST" action="{% url 'social:dislike' post.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <button type="submit">dislike
+                        <span>{{ post.dislike.all.count }}</span>
+                    </button>
+                  </form>
             </div>
         {% endfor %}
 </div>
