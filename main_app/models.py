@@ -40,7 +40,6 @@ class Post(models.Model):
     like = models.ManyToManyField(User, blank=True, related_name='like') 
     dislike = models.ManyToManyField(User, blank=True, related_name='dislike') 
     created_at = models.DateTimeField(default=timezone.now)
- 
 
     def __str__(self):
         return (
@@ -48,6 +47,8 @@ class Post(models.Model):
             f"({self.created_at:%Y-%m-%d %H:%M}): "
             f"{self.text[:30]}..."
         )
+    
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE,null=True)
@@ -57,4 +58,11 @@ class Comment(models.Model):
     dislike = models.ManyToManyField(User, blank=True, related_name='+') 
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return (
+            f"{self.user} "
+            f"({self.created_at:%Y-%m-%d %H:%M}): "
+            f"{self.text[:30]}..."
+        )
 
