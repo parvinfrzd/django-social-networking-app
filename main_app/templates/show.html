@@ -8,8 +8,12 @@
   </div>
   {% if current_user.pk == current_post_user.pk %}
   <div class="card-action">
-    <a href="{% url 'social:posts_update' post.id %}">Edit</a>
-    <a href="{% url 'social:posts_delete' post.id %}">Delete</a>
+    <a href="{% url 'social:posts_update' post.id %}" class="card-footer-item"
+      >Edit</a
+    >
+    <a href="{% url 'social:posts_delete' post.id %}" class="card-footer-item"
+      >Delete</a
+    >
   </div>
   {% endif %}
 </div>

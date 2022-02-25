@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends '../base.html' %} {% block content %}
+<h1>Delete Post</h1>
 
-{% block content %}
-  <h1>Delete Post</h1>
+<h4>
+  Are you sure you want to delete <span class="teal-text">this post</span>?
+</h4>
+<!-- didn't use object.name, used "This Post" instead because would be too long it would look strange -->
 
-  <h4>Are you sure you want to delete <span class="teal-text">this post</span>?</h4>
-  <!-- didn't use object.name, used "This Post" instead because would be too long it would look strange -->
-
-  <form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'social:show' post.id %}">Cancel</a>
-  </form>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes - Delete!" class="btn" />
+  <a href="{% url 'social:show' post.id %}">Cancel</a>
+</form>
 {% endblock %}

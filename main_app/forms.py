@@ -10,7 +10,7 @@ class SignUpForm(UserCreationForm):
     last_name=forms.CharField(required=True)
     email=forms.EmailField(required=True)
     password1=forms.CharField(required=True)
-    password2=forms.CharField(required=True)
+    confirm_password=forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
