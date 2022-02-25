@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
+<div class="column is-three-quarters">
     {% comment %} write a post {% endcomment %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="button is-success is-fullwidth is-medium mt-5"
+        <br>
+        <button class="button is-rounded is-info is-light is-outlined is-fullwidth"
                 type="submit">Post
         </button>
     </form>
@@ -38,6 +39,5 @@
             </div>
         {% endfor %}
 </div>
-
 
 {% endblock %}
