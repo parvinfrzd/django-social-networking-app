@@ -2,7 +2,7 @@
 
 <div class="column">
   <div class="block">
-    <h1 class="title is-1">{{profile.user.username|upper}}'s Feeds</h1>
+    <h1 class="title is-1">{{profile.user.username|upper}}</h1>
     <p class="is-6">{{profile.bio}}</p>
   </div>
   {% if current_user.pk != profile.pk %}
@@ -63,15 +63,16 @@
   </div>
   <form method="POST">
     {% csrf_token %} {{ form.as_p }}
+    <br>
     <button
-      class="button is-rounded is-success is-fullwidth is-medium mt-5"
+      class="button is-rounded is-info is-light is-outlined is-fullwidth"
       type="submit"
     >
       Post
     </button>
   </form>
   {% endif %}
-
+  <br>
   <div class="block">
     <h3 class="title is-4">{{profile.user.username}} following:</h3>
     <div class="content">
