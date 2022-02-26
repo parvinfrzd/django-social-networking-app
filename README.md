@@ -29,7 +29,7 @@
 #### Roles: 
  1. [Parvin Farahzadeh](): Github Manager, Back-end developer, System design
  2. [Jas Rai](): Full-stack developer, Trello board manager, and front-end development
- 3. [Dylan Burston](): Full-stack developer
+ 3. [Dylan Burston](): Full-stack developer, CSS developer
 
 ## Entity Relationship Diagram: 
 #### Our ERD is based on the user stories we defined for the first MVP
@@ -97,9 +97,23 @@ class ProfileDelete(LoginRequiredMixin,DeleteView):
         profile.delete()
         return HttpResponseRedirect(reverse(''))
 ```
+```
+class PostCreate(CreateView):
+    model = Post
+    fields = '__all__'
+    success_url = '/posts/'
+class PostUpdate(LoginRequiredMixin,UpdateView):
+    model = Post
+    fields = ['text']
+    success_url = '/'
+class PostDelete(LoginRequiredMixin,DeleteView):
+    model = Post
+    success_url = '/'
+```
    3. The like and dislike functionality on user posts required both class based and costume methods: 
 ```
-def post(self, request, pk, *args, **kwargs):
+class AddLike(View):
+    def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         is_dislike = False
         for dislike in post.dislike.all():
@@ -125,13 +139,13 @@ def post(self, request, pk, *args, **kwargs):
 ```
 ## Gallery: 
 ![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/1.png?raw=true)
-![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/2.png?raw=true)
-![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/3.png?raw=true)
-![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/4.png?raw=true)
-![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/5.png?raw=true)
-![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/6.png?raw=true)
-![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/7.png?raw=true)
 ![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/8.png?raw=true)
+![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/7.png?raw=true)
+![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/5.png?raw=true)
+![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/4.png?raw=true)
+![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/3.png?raw=true)
+![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/2.png?raw=true)
+![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/6.png?raw=true)
 
 ## Technologies: 
 
@@ -154,4 +168,5 @@ def post(self, request, pk, *args, **kwargs):
 #### We recommend you to checkout these two tutorials on the basis of building social media applications with Django and Python 
 1. [Legion Script](https://www.youtube.com/channel/UCF7k5gX55WvJ-SFXGsPsLTg): A good resource for building any trending django based application.
 2. [RealPython](https://realpython.com/): A website full of python tutorials.
+3. [Bulma](https://bulma.io/): A styling framework that works actively with Django based applications. We moved on from Materialize because of the less responsive behaviour with the backend framework.  
 
