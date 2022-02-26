@@ -6,7 +6,7 @@
 ## Table of Content: 
 
 1. [Getting Started](#getting-started)
-2. [Getting Started (dev)](#getting-started-(dev))
+2. [Getting Started (dev)](#getting-started-dev)
 3. [Project Management](#project-management)
 4. [Entity Relationship Diagram](#entity-relationship-diagram)
 5. [User Stories and Wireframe](#user-stories-and-wireframe)
@@ -16,7 +16,8 @@
 9. [Future Updates](#future-updates)
 10. [References](#references)
    <br>
-##  Getting Started:
+   
+## Getting Started:
 #### To get started with your first post, click on this [link](https://parjalan.herokuapp.com).
 <br>
 
