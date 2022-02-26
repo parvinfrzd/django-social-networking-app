@@ -10,10 +10,11 @@
 3. [Project Management](#project-management)
 4. [Entity Relationship Diagram](#entity-relationship-diagram)
 5. [User Stories and Wireframe](#user-stories-and-wireframe)
-6. [Gallery](#gallery)
-7. [Technologies](#technologies)
-8. [Future Updates](#future-updates)
-9. [References](#references)
+6. [Code Snippets](#code-snippets)
+7. [Gallery](#gallery)
+8. [Technologies](#technologies)
+9. [Future Updates](#future-updates)
+10. [References](#references)
    <br>
 ##  Getting Started:
 #### To get started with your first post, click on this [link](https://parjalan.herokuapp.com).
@@ -54,6 +55,73 @@
 ![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/wireframe.png?raw=true)
 <br>
 
+## Code Snippets: 
+As a group, we used different methods to tackle our problems 
+
+1. Make the follow/unfollow relation among users: 
+```
+     def profile(request,pk): 
+        profile = Profile.objects.get(pk=pk)
+        current_user = request.user.profile
+        posts = profile.user.posts.order_by('-created_at')
+        form = PostForm(request.POST or None)
+        if request.method == "POST":
+            current_user_profile = request.user.profile
+            data = request.POST
+            action = data.get("follow")
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.save()
+                return redirect(f"/profile/{profile.pk}")
+            if(current_user.pk != profile.pk):
+                if action == "follow":
+                    current_user_profile.follows.add(profile)
+                elif action == "unfollow":
+                    current_user_profile.follows.remove(profile)
+                current_user_profile.save()   
+        form = PostForm()
+        return render(request,'main_app/profile.html',{'profile':profile, 'current_user':current_user, 'posts':posts, 'form': form})
+```
+   2. For update and delete, we decided to go with View class in Django : 
+```
+class ProfileDelete(LoginRequiredMixin,DeleteView):
+    model = Profile
+    success_url = '/'
+    def delete(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        profile = Profile.objects.filter(profile_id=id)
+        logout(request,self.user)
+        profile.delete()
+        return HttpResponseRedirect(reverse(''))
+```
+   3. The like and dislike functionality on user posts required both class based and costume methods: 
+```
+def post(self, request, pk, *args, **kwargs):
+        post = Post.objects.get(pk=pk)
+        is_dislike = False
+        for dislike in post.dislike.all():
+            if dislike == request.user:
+                is_dislike = True
+                break
+        if is_dislike:
+            post.dislike.remove(request.user)
+        is_like = False
+        for like in post.like.all():
+            if like == request.user:
+                is_like = True
+                break
+        if not is_like:
+            post.like.add(request.user.id)
+        if is_like:
+            post.like.remove(request.user.id)
+        def likecount():
+            print("1")
+        likecount()
+        next = request.POST.get('next', '/')
+        return HttpResponseRedirect(next)
+```
 ## Gallery: 
 ![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/1.png?raw=true)
 ![alt text](https://github.com/parvinfrzd/django-social-networking-app/blob/master/main_app/static/images/readme_img/2.png?raw=true)
